@@ -65,7 +65,7 @@ Challenge Amigo Secreto transforma los sorteos tradicionales en una experiencia 
 ## Personas-Desarrolladores del Proyecto
 
 Mayra Artoni
-🌟 Desarrolladora del proyecto.
+⚡ Desarrolladora del proyecto.
 📧 mayra.artoni@gmail.com
 
 
