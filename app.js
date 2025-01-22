@@ -1,4 +1,4 @@
-// El principal objetivo de este desafío es fortalecer tus habilidades en lógica de programación. Aquí deberás desarrollar la lógica para resolver el problema.
+
 
 let listaAmigos = [];
 let listaAmigosSorteados = [];
@@ -8,17 +8,22 @@ let liLista=document.getElementById("listaAmigos");
 console.log(`lista de amigos: ${listaAmigos}`)
 
 function agregarAmigo(){
-
+    
     if (document.getElementById("amigo").value == ""){
         alert("Debes escribir el nombre de un amigo para agregarlo al sorteo");
         return 
     } else { 
         let amigo = document.getElementById("amigo")
-        listaAmigos.push(amigo.value)
-        listaAmigosDisponibles.push(amigo.value)
-        console.log(`lista de amigos: ${listaAmigos}`)
-        actualizarLista();
-        limpiarCampo();
+           if (listaAmigos.includes(amigo.value)) {
+            alert("Ya incluiste ese amigo en tu lista!")
+            limpiarCampo()
+           } else {
+                listaAmigos.push(amigo.value)
+                listaAmigosDisponibles.push(amigo.value)
+                console.log(`lista de amigos: ${listaAmigos}`)
+                actualizarLista();
+                limpiarCampo();
+           }
     }
 }
 
@@ -43,16 +48,18 @@ function sortearAmigo(){
     for (let i = 0; i < listaAmigosDisponibles.length; i++) {
         if (listaAmigosDisponibles[i] === amigoGanador) {
             listaAmigosDisponibles.splice(i, 1); // si el amigo ya salio sorteado lo elimina de la lista de amigos disponibles
-            break // si no se incluye el break, si hay dos amigos con el mismo nombre los tacha a ambos
+            break 
         }
     }
     
     let liItems = document.querySelectorAll("ul li"); // Obtener todos los <li> de la lista
-    for (let item of liItems) {
-        if (item.textContent === amigoGanador) {
-            item.classList.add("tachado"); 
-            break; // si no se incluye el break, si mas de 1 amigo con el mismo nombre los tacha a ambos
-    }
+    for ( item of liItems) {
+        for (let item of liItems) {
+            if (item.textContent.trim() === amigoGanador.trim()) { //.trim() elimina los espacios en blanco al principio y al final del texto,
+                item.classList.add("tachado");
+                break;
+            } 
+        }
 
     document.getElementById("resultado").innerHTML=amigoGanador;
     }
@@ -74,6 +81,4 @@ function reiniciarSorteo(){
     amigoGanador = ""; //borra el amigo ganador
     document.getElementById("resultado").innerHTML=""; //borra el resultado
     listaAmigosDisponibles=[]; 
-    }
-
-
+}
